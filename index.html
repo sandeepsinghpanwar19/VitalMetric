@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VitalMetric | BMI Health Assessment</title>
+<meta name="description" content="An educational BMI screening tool with practical guidance.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#assessment">Skip to assessment</a>
+
+<header class="site-header" id="top">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="VitalMetric home">
+      <span class="mark" aria-hidden="true"></span>
+      <span><strong>VitalMetric</strong><small>BMI Health Assessment</small></span>
+    </a>
+    <nav id="nav" class="nav" aria-label="Main">
+      <a href="#assessment">Assessment</a>
+      <a href="#results">Results</a>
+      <a href="#guide">Health Guide</a>
+      <a href="#about">About BMI</a>
+    </nav>
+    <div class="bar-actions">
+      <button id="themeToggle" class="icon-btn" type="button" aria-label="Switch to dark theme">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button id="menuToggle" class="icon-btn menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <p class="eyebrow">Body Mass Index</p>
+        <h1>Understand your body. Make informed choices.</h1>
+        <p class="lead">Calculate your Body Mass Index and explore practical health guidance based on your measurements.</p>
+        <div class="hero-cta">
+          <a class="btn primary" href="#assessment" id="startBtn">Start Assessment</a>
+          <span class="note">Takes under a minute. Nothing leaves your device.</span>
+        </div>
+      </div>
+      <svg class="hero-art" viewBox="0 0 320 220" aria-hidden="true">
+        <rect x="20" y="150" width="280" height="14" rx="7" class="a1"/>
+        <rect x="20" y="150" width="90" height="14" rx="7" class="a2"/>
+        <circle cx="160" cy="157" r="14" class="a3"/>
+        <path d="M20 110 C80 40 140 120 200 70 S290 40 300 60" class="a4"/>
+        <circle cx="300" cy="60" r="5" class="a3"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="assessment">
+    <div class="wrap">
+      <div class="card calc reveal">
+        <div class="card-head">
+          <h2>BMI Assessment</h2>
+          <p>Enter your details below. Values stay in your browser.</p>
+        </div>
+        <form id="bmiForm" novalidate>
+          <fieldset>
+            <legend>Personal information</legend>
+            <div class="row">
+              <div class="field">
+                <label for="age">Age</label>
+                <div class="input"><input id="age" type="number" inputmode="numeric" min="2" max="120" step="1" placeholder="e.g. 28" aria-describedby="err-age"><span class="suffix">years</span></div>
+                <p class="error" id="err-age" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="sex">Sex</label>
+                <div class="input"><select id="sex">
+                  <option value="none">Prefer not to say</option>
+                  <option value="female">Female</option>
+                  <option value="male">Male</option>
+                </select></div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Height</legend>
+            <div class="seg" role="group" aria-label="Height unit">
+              <button type="button" class="on" data-kind="height" data-unit="cm" aria-pressed="true">cm</button>
+              <button type="button" data-kind="height" data-unit="ftin" aria-pressed="false">ft / in</button>
+            </div>
+            <div class="field" id="heightCmWrap">
+              <label for="heightCm">Height</label>
+              <div class="input"><input id="heightCm" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 170" aria-describedby="err-height"><span class="suffix">cm</span></div>
+            </div>
+            <div class="row" id="heightFtWrap" hidden>
+              <div class="field">
+                <label for="heightFt">Feet</label>
+                <div class="input"><input id="heightFt" type="number" inputmode="numeric" step="1" placeholder="5"><span class="suffix">ft</span></div>
+              </div>
+              <div class="field">
+                <label for="heightIn">Inches</label>
+                <div class="input"><input id="heightIn" type="number" inputmode="decimal" step="0.1" placeholder="7"><span class="suffix">in</span></div>
+              </div>
+            </div>
+            <p class="error" id="err-height" role="alert"></p>
+          </fieldset>
+
+          <fieldset>
+            <legend>Weight</legend>
+            <div class="seg" role="group" aria-label="Weight unit">
+              <button type="button" class="on" data-kind="weight" data-unit="kg" aria-pressed="true">kg</button>
+              <button type="button" data-kind="weight" data-unit="lb" aria-pressed="false">lb</button>
+            </div>
+            <div class="field">
+              <label for="weight">Weight</label>
+              <div class="input"><input id="weight" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 68" aria-describedby="err-weight"><span class="suffix" id="weightSuffix">kg</span></div>
+              <p class="error" id="err-weight" role="alert"></p>
+            </div>
+          </fieldset>
+
+          <div class="actions">
+            <button class="btn primary" id="calcBtn" type="submit"><span class="spin" aria-hidden="true"></span><span class="label">Calculate My BMI</span></button>
+            <button class="btn ghost" id="resetBtn" type="button">Reset Assessment</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="results" aria-labelledby="resultsTitle">
+    <div class="wrap">
+      <h2 id="resultsTitle" class="sec-title">Results</h2>
+      <div class="empty card" id="emptyState">
+        <p><strong>No results yet.</strong></p>
+        <p>Complete the assessment above to see your BMI, a position gauge and general guidance.</p>
+      </div>
+
+      <div id="resultPanel" hidden>
+        <div class="card result-main" aria-live="polite">
+          <div class="score">
+            <p class="kicker">Your BMI</p>
+            <p class="bmi" id="bmiValue">0.0</p>
+            <p class="cat" id="catBadge"></p>
+          </div>
+          <div class="summary">
+            <h3 id="summaryTitle"></h3>
+            <p id="summaryText"></p>
+            <div class="gauge" id="gaugeBox">
+              <p class="kicker">BMI position</p>
+              <div class="track" role="img" id="gaugeTrack">
+                <span class="seg-u"></span><span class="seg-h"></span><span class="seg-o"></span><span class="seg-b"></span>
+                <span class="marker" id="marker"></span>
+              </div>
+              <div class="scale"><span>Underweight</span><span>Healthy</span><span>Overweight</span><span>Obesity</span></div>
+            </div>
+            <div class="range" id="rangeBox">
+              <p class="kicker">Approximate BMI-based healthy weight range</p>
+              <p class="range-val" id="rangeVal"></p>
+              <p class="small">An approximate range for your height, not a personal ideal-weight prescription.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Assessment summary</h3>
+            <dl class="facts" id="facts"></dl>
+            <p id="ageNote" class="small"></p>
+          </div>
+          <div class="card notice">
+            <h3>Important: BMI is a screening measure</h3>
+            <p>BMI does not directly measure body fat percentage, muscle mass, bone density, fat distribution, metabolic health or overall fitness. Muscular people can have a higher BMI without high body fat. Consider BMI alongside other health information.</p>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card do"><h3>What you can do</h3><ul id="doList"></ul></div>
+          <div class="card avoid"><h3>What to avoid</h3><ul id="avoidList"></ul></div>
+        </div>
+        <p class="small sexnote" id="sexNote"></p>
+
+        <div class="actions end">
+          <button class="btn primary" id="printBtn" type="button">Print Results</button>
+          <button class="btn ghost" id="resetBtn2" type="button">Reset Assessment</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="guide">
+    <div class="wrap">
+      <h2 class="sec-title">Health Guide</h2>
+      <div class="cards">
+        <article class="card g reveal"><h3>Nutrition</h3><p>Regular, balanced meals support steady energy.</p><ul><li>Include vegetables and fruit daily</li><li>Choose whole grains where possible</li><li>Add a protein source to meals</li></ul></article>
+        <article class="card g reveal"><h3>Movement</h3><p>Regular activity matters at every size.</p><ul><li>Find activities you enjoy</li><li>Add strength work during the week</li><li>Break up long periods of sitting</li></ul></article>
+        <article class="card g reveal"><h3>Sleep</h3><p>Consistent sleep supports mood and recovery.</p><ul><li>Keep regular sleep and wake times</li><li>Limit screens before bed</li><li>Keep your room dark and cool</li></ul></article>
+        <article class="card g reveal"><h3>Hydration</h3><p>Water needs vary with climate and activity.</p><ul><li>Keep water within reach</li><li>Drink more in hot weather</li><li>Notice thirst and urine colour</li></ul></article>
+        <article class="card g reveal"><h3>Healthy Habits</h3><p>Small routines tend to last longer than big changes.</p><ul><li>Change one habit at a time</li><li>Track trends, not daily swings</li><li>Plan for busy days</li></ul></article>
+        <article class="card g reveal"><h3>Professional Support</h3><p>A professional can look at the whole picture.</p><ul><li>Book routine health checks</li><li>Discuss weight changes you did not intend</li><li>Ask a dietitian for tailored plans</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint" id="about">
+    <div class="wrap">
+      <h2 class="sec-title">About BMI</h2>
+      <div class="grid2">
+        <div class="card">
+          <h3>Adult BMI categories</h3>
+          <table class="cat-table">
+            <thead><tr><th scope="col">BMI</th><th scope="col">Category</th></tr></thead>
+            <tbody>
+              <tr><td>Below 18.5</td><td><i class="dot c-u" aria-hidden="true"></i>Underweight</td></tr>
+              <tr><td>18.5 – 24.9</td><td><i class="dot c-h" aria-hidden="true"></i>Healthy weight</td></tr>
+              <tr><td>25.0 – 29.9</td><td><i class="dot c-o" aria-hidden="true"></i>Overweight</td></tr>
+              <tr><td>30.0 and above</td><td><i class="dot c-b" aria-hidden="true"></i>Obesity (Class I 30–34.9, II 35–39.9, III 40+)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h3>How it is calculated</h3>
+          <p>BMI = weight (kg) divided by height (m) squared. The formula is the same for all adults regardless of sex, though body composition and health interpretation can differ.</p>
+          <p>For people under 18, BMI is read against age- and sex-specific growth percentiles, so adult categories do not apply.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap foot">
+    <div><strong>VitalMetric</strong><p>BMI Health Assessment</p><p class="small">An educational BMI screening tool.</p></div>
+    <nav aria-label="Footer"><a href="#about">BMI Categories</a><a href="#guide">Health Guide</a><a href="#results">BMI Limitations</a><a href="#privacy">Privacy</a></nav>
+  </div>
+  <div class="wrap">
+    <p class="small" id="privacy">Privacy: calculations run in your browser. Nothing is sent anywhere. Only your theme choice is saved locally.</p>
+    <p class="small">This tool provides general educational information and is not a medical diagnosis or substitute for professional medical advice.</p>
+  </div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
